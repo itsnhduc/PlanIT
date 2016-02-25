@@ -1,0 +1,46 @@
+<template name="home">
+	<h1>Home</h1>
+	{{#if currentUser}}
+		<h2>Hi {{currentUser.profile.firstname}}, check out your <a href="/">Newsfeed</a>.</h2> 
+	{{else}}
+		<section>
+			<h2>Login</h2>
+			<form id="form-login">
+				<div class="form-group">
+					<input class="form-control" type="email" id="login-email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="password" id="login-password" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<button id="login" type="submit" class="btn btn-default">
+						Login
+					</button>
+				</div>
+			</form>
+		</section>
+		<section>
+			<h2>Register</h2>
+			<form id="form-register">
+				<div class="form-group">
+					<input class="form-control" type="text" id="reg-firstname" placeholder="First name">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" id="reg-lastname" placeholder="Last name">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="email" id="reg-email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="password" id="reg-password" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<button id="register" type="submit" class="btn btn-default sh-active-element">
+						Register
+					</button>
+				</div>
+			</form>
+		</section>
+	{{/if}}
+	
+</template>
