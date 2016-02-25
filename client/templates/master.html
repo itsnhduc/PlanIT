@@ -3,12 +3,19 @@
 		<h1>PlanIT</h1>
 		<ul>
 			<li>
+				<a href="/home">Home</a>
+			</li>
+			<li>
 				<a href="/">Newsfeed</a>
 			</li>
 			<li>
 				<a href="/create-plan">Create Plan</a>
 			</li>
 		</ul>
+		{{#if currentUser}}
+			<h2>Wellcome, {{currentUser.profile.firstname}} {{currentUser.profile.lastname}}</h2>
+			<button id="logout" class="btn btn-danger">Logout</button>
+		{{/if}}
 		<hr>
 		{{> yield}}
 	</main>

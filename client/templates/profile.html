@@ -1,0 +1,9 @@
+<template name="profile">
+	<h1>User Profile</h1>
+	<p><span style="font-weight: bold">First name: </span>{{profile.firstname}}</p>
+	<p><span style="font-weight: bold">Last name: </span>{{profile.lastname}}</p>
+	{{#if isOwner}}
+		<p><span style="font-weight: bold">Email: </span><a href="mailto:{{email}}">{{email}}</a></p>
+		<button id="settings" class="btn btn-default">Profile settings</button>
+	{{/if}}
+</template>
