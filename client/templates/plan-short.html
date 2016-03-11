@@ -1,7 +1,15 @@
 <template name="planShort">
 	<h3>
-		<a href="/plan/{{_id}}">&raquo;{{title}} ({{visibility}})</a>
+		<a href="/plan/{{_id}}">&raquo;{{title}}</a>
 	</h3>
-	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a></h5>
+	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
+	<h5>at <a href="#">{{location}}</a></h5>
 	<h4>{{description}}</h4>
+	{{#if showBtnGroup}}
+	<div class = "btn-group">
+		<button type="button" class="btn btn-{{colorGoing}} going">Going</button>
+		<button type="button" class="btn btn-{{colorInterested}} interested">Interested</button>
+		<button type="button" class="btn btn-{{colorNotGoing}} not-going">Not going</button>
+	</div>
+	{{/if}}
 </template>

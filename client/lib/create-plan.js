@@ -6,12 +6,15 @@ if (Meteor.isClient) {
 
 			var title = $('#title').val();
 			var description = $('#description').val();
+			var location = $('#location').val();
 			var visibility = $('[name=v-option]:checked').val();
 
 			Plans.insert({
 				title: title,
 				description: description,
+				location: location,
 				visibility: visibility,
+				participants: [],
 				createdAt: new Date(),
 				createdBy: Meteor.userId()
 			});

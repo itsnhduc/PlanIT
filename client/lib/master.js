@@ -9,6 +9,10 @@ if (Meteor.isClient) {
 				}
 			});
 			Router.go('/home');
+		},
+		'click #profile-settings': function(event) {
+			event.preventDefault();
+			Router.go('/user/' + Meteor.userId() + '/settings');
 		}
 	});
 

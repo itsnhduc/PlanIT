@@ -2,7 +2,6 @@ if (Meteor.isClient) {
 
 	Template.profile.helpers({
 		'email': function() {
-			console.log('yes');
 			return this.emails[0].address;
 		},
 		'isOwner': function() {
