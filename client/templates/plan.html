@@ -1,9 +1,9 @@
 <template name="plan">
-	<h3>{{title}}</h3>
+	<h3>&raquo;{{title}}</h3>
 	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
 	<h4>{{description}}</h4>
-	<h5>Going:</h5>
-	<h5>Interested:</h5>
+	<h5><strong>Going:</strong> {{#each goingUsers}}{{this}}{{/each}}</h5>
+	<h5><strong>Interested:</strong> {{#each interestedUsers}}{{this}}{{/each}}</h5>
 	{{#if isOwner}}
 		<button id="settings" class="btn btn-primary">Plan settings</button>
 	{{/if}}

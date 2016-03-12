@@ -1,5 +1,19 @@
 if (Meteor.isClient) {
 
+	var generateParticipantPool = function(plan, status) {
+		var pool = plan.participants;
+		var names = [];
+		for (var i = 0; i < pool.length; i++) {
+			var cur = pool[i];
+			if (cur.status == status) {
+				var user = Meteor.users.findOne(cur.userId);
+				names.push(user.profile.firstname + ' ' + user.profile.lastname + ', ');
+			}
+		}
+		names[names.length - 1] = names[names.length - 1].replace(', ', '');
+		return names;
+	}
+
 	Template.plan.helpers({
 		'organizer': function() {
 			var user = Meteor.users.findOne(this.createdBy);
@@ -7,6 +21,12 @@ if (Meteor.isClient) {
 		},
 		'isOwner': function() {
 			return this.createdBy == Meteor.userId();
+		},
+		'goingUsers': function() {
+			return generateParticipantPool(this, 'going');
+		},
+		'interestedUsers': function() {
+			return generateParticipantPool(this, 'interested');
 		}
 	});
 

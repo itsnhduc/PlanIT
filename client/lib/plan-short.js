@@ -6,11 +6,15 @@ if (Meteor.isClient) {
 		var pool = plan.participants;
 		for (var i = 0; i < pool.length; i++) {
 			var user = pool[i];
-			if (user.userId == userId && user.status != newStatus) {
-				Plans.update(plan._id, {$pull: {
-					participants: user
-				}});
-				break;
+			if (user.userId == userId) {
+				if (user.status != newStatus) {
+					Plans.update(plan._id, {$pull: {
+						participants: user
+					}});
+					break;
+				} else {
+					return;
+				}
 			}
 		}
 		Plans.update(plan._id, {$push: {
