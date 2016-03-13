@@ -6,4 +6,9 @@
 		<p><span style="font-weight: bold">Email: </span><a href="mailto:{{email}}">{{email}}</a></p>
 		<button id="settings" class="btn btn-primary">Profile settings</button>
 	{{/if}}
+	<br>
+	<h3>Plans</h3>
+	{{#each plans}}
+		{{> planShort}}
+	{{/each}}
 </template>

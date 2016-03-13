@@ -3,7 +3,8 @@
 	{{#if currentUser}}
 		<h2>Hi {{currentUser.profile.firstname}}, check out your <a href="/">Newsfeed</a>.</h2> 
 	{{else}}
-		<section>
+	<main class="row">
+		<section class="col-md-6">
 			<h2>Login</h2>
 			<form id="form-login">
 				<div class="form-group">
@@ -19,7 +20,7 @@
 				</div>
 			</form>
 		</section>
-		<section>
+		<section class="col-md-6">
 			<h2>Register</h2>
 			<form>
 				<div class="form-group">
@@ -41,6 +42,7 @@
 				</div>
 			</form>
 		</section>
+	</main>
 	{{/if}}
 	
 </template>

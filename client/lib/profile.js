@@ -6,6 +6,9 @@ if (Meteor.isClient) {
 		},
 		'isOwner': function() {
 			return this._id == Meteor.userId();
+		},
+		'plans': function() {
+			return Plans.find({createdBy: this._id});
 		}
 	});
 
