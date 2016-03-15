@@ -1,14 +1,48 @@
 <template name="profile">
-	<h1>User Profile</h1>
-	<p><span style="font-weight: bold">First name: </span>{{profile.firstname}}</p>
-	<p><span style="font-weight: bold">Last name: </span>{{profile.lastname}}</p>
-	{{#if isOwner}}
-		<p><span style="font-weight: bold">Email: </span><a href="mailto:{{email}}">{{email}}</a></p>
-		<button id="settings" class="btn btn-primary">Profile settings</button>
-	{{/if}}
+	<div class="info-container">
+		<h1>User Profile</h1>
+		<h2>{{profile.firstname}} {{profile.lastname}}</h2>
+		<p><span style="font-weight: bold">First name: </span>{{profile.firstname}}</p>
+		<p><span style="font-weight: bold">Last name: </span>{{profile.lastname}}</p>
+		{{#if isOwner}} <!-- Private info -->
+			<p><span style="font-weight: bold">Email: </span><a href="mailto:{{email}}">{{email}}</a></p>
+			<button id="settings" class="btn btn-primary">Profile settings</button>
+		{{/if}}
+	</div>
+
+	<div class="relationship-container">
+		{{#unless isOwner}}
+			{{#if isBeingRequested}}
+				<button id="accept-request" class="btn btn-primary">+ Accept friend request</button>
+			{{else}}
+				{{#if isFriend}}
+					<button id="unfriend" class="btn btn-danger">&times; Unfriend</button>
+				{{else}}
+					{{#if hasRequested}}
+						<button id="cancel-request" class="btn btn-success">&#x2713; Friend request sent</button>
+					{{else}}
+						<button id="add-friend" class="btn btn-primary">+ Add friend</button>
+					{{/if}}
+				{{/if}}
+			{{/if}}
+		{{/unless}}
+	</div>
+
 	<br>
-	<h3>Plans</h3>
-	{{#each plans}}
-		{{> planShort}}
-	{{/each}}
+
+	<div class="friends-container">
+		<h3>Friends</h3>
+		{{#each friends}}
+			<a href="/user/{{_id}}">{{name}}</a>
+		{{/each}}
+	</div>
+
+	<br>
+
+	<div class="plans-container">
+		<h3>Plans</h3>
+		{{#each plans}}
+			{{> planShort}}
+		{{/each}}
+	</div>
 </template>

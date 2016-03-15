@@ -26,7 +26,8 @@ if (Meteor.isClient) {
 				password: password,
 				profile: {
 					firstname: firstname,
-					lastname: lastname
+					lastname: lastname,
+					friends: []
 				}
 			});
 			Meteor.loginWithPassword(email, password, function(err) {
