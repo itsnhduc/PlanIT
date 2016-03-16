@@ -15,6 +15,7 @@ if (Meteor.isClient) {
 				location: location,
 				visibility: visibility,
 				participants: [],
+				comments: [],
 				createdAt: new Date(),
 				createdBy: Meteor.userId()
 			});

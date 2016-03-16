@@ -8,4 +8,18 @@
 	{{#if isOwner}}
 		<button id="settings" class="btn btn-primary">Plan settings</button>
 	{{/if}}
+	<br>
+	<h4>Comments</h4>
+	<form class="row">
+		<div class="col-md-4 form-group">
+			<input id="comment-input" type="text" class="form-control" placeholder="What's on your mind?">
+		</div>
+		<div class="col-md-1 form-group">
+			<button id="add-comment" class="btn btn-primary">Comment</button>
+		</div>
+	</form>
+	
+	{{#each comments}}
+		<p><strong>{{name}}:</strong> {{text}}{{#if isCommentOwner}} - <a id="delete-comment" href="#">Delete</a>{{/if}}</p>
+	{{/each}}
 </template>
