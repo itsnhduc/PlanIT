@@ -1,6 +1,7 @@
 <template name="plan">
 	<h3>&raquo;{{title}}</h3>
 	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
+	<h5>at <a href="#">{{location}}</a></h5>
 	<h4>{{description}}</h4>
 	<h5><strong>Going:</strong> {{#each goingUsers}}{{this}}{{/each}}</h5>
 	<h5><strong>Interested:</strong> {{#each interestedUsers}}{{this}}{{/each}}</h5>

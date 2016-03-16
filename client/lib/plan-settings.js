@@ -5,16 +5,18 @@ if (Meteor.isClient) {
 			event.preventDefault();
 
 			var title = $('#title').val();
+			var location = $('#location').val();
 			var description = $('#description').val();
 			var visibility = $('[name=v-option]:checked').val();
 
-			Plans.update(this._id, {
+			Plans.update(this._id, {$set: {
 				title: title,
 				description: description,
+				location: location,
 				visibility: visibility,
 				createdAt: new Date(),
 				createdBy: Meteor.userId()
-			});
+			}});
 			
 			Router.go('/plan/' + this._id);
 		},

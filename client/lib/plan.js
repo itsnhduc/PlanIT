@@ -16,8 +16,12 @@ if (Meteor.isClient) {
 
 	Template.plan.helpers({
 		'organizer': function() {
-			var user = Meteor.users.findOne(this.createdBy);
-			return user.profile.firstname + ' ' + user.profile.lastname;
+			if (this.createdBy == Meteor.userId()) {
+				return 'You';
+			} else {
+				var user = Meteor.users.findOne(this.createdBy);
+				return user.profile.firstname + ' ' + user.profile.lastname;
+			}
 		},
 		'isOwner': function() {
 			return this.createdBy == Meteor.userId();
