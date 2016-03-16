@@ -65,7 +65,7 @@ if (Meteor.isClient) {
 			Router.go('/user/' + this._id + '/settings');
 		},
 		'mouseenter #cancel-request': function() {
-			$('#cancel-request').text(String.fromCharCode(215) + 'Cancel friend request');
+			$('#cancel-request').text(String.fromCharCode(215) + ' Cancel friend request');
 			$('#cancel-request').removeClass('btn-success');
 			$('#cancel-request').addClass('btn-danger');
 		},
@@ -80,12 +80,12 @@ if (Meteor.isClient) {
 		},
 		'click #cancel-request': function(event) {
 			event.preventDefault();
-			Meteor.call('removeFriendRecord', this._id);
+			Meteor.call('removeFriendRecord', this._id, false);
 		},
 		'click #unfriend': function(event) {
 			event.preventDefault();
 			if (confirm('Unfriend this person?')) {
-				Meteor.call('removeFriendRecord', this._id);
+				Meteor.call('removeFriendRecord', this._id, true);
 			}
 		},
 		'click #accept-request': function(event) {

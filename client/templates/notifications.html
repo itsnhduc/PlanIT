@@ -1,3 +1,10 @@
 <template name="notifications">
 	<h1>Notifications</h1>
+	<ul class="list-group">
+		{{#each notifications}}
+			<li class="list-group-item">
+				<p><strong>{{name}}</strong> {{action}}</p>
+			</li>
+		{{/each}}
+	</ul>
 </template>
