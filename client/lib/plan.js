@@ -6,7 +6,7 @@ if (Meteor.isClient) {
 		for (var i = 0; i < pool.length; i++) {
 			var cur = pool[i];
 			if (cur.status == status) {
-				var user = Meteor.users.findOne(cur.createdBy);
+				var user = Meteor.users.findOne(cur.userId);
 				names.push(user.profile.firstname + ' ' + user.profile.lastname + ', ');
 			}
 		}

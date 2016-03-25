@@ -38,6 +38,12 @@ if (Meteor.isServer) {
 						_id: targetId
 					}
 				}});
+				Meteor.users.update({_id: targetId}, {$pull: {
+					'profile.notifications': {
+						userId: Meteor.userId(),
+						action: 'friend confirm'
+					}
+				}});
 				Meteor.users.update({_id: Meteor.userId()}, {$pull: {
 					'profile.notifications': {
 						userId: targetId,
@@ -71,9 +77,9 @@ if (Meteor.isServer) {
 					isConfirmed: true
 				}
 			}});
-			Meteor.users.update({_id: requesterId}, {$pull: {
+			Meteor.users.update({_id: Meteor.userId()}, {$pull: {
 				'profile.notifications': {
-					userId: Meteor.userId(),
+					userId: requesterId,
 					action: 'friend request'
 				}
 			}});

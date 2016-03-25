@@ -3,7 +3,7 @@
 	<ul class="list-group">
 		{{#each notifications}}
 			<li class="list-group-item">
-				<p><strong>{{name}}</strong> {{action}}</p>
+				<p><strong><a href="/user/{{targetUserId}}">{{name}}</a></strong> {{action}}</p>
 			</li>
 		{{/each}}
 	</ul>

@@ -20,6 +20,7 @@ if (Meteor.isClient) {
 				var targetUser = Meteor.users.findOne(curNoti.userId);
 				notifications.push({
 					name: targetUser.profile.firstname + ' ' + targetUser.profile.lastname,
+					targetUserId: targetUser._id,
 					action: generateActionNoti(curNoti.action)
 				});
 			}
