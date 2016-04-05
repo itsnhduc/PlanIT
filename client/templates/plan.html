@@ -1,7 +1,30 @@
 <template name="plan">
 	<h3>&raquo;{{title}}</h3>
 	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
-	<h5>at <a href="#">{{location}}</a></h5>
+	<h5>at <a href="#" class="location" data-toggle="modal" data-target="#mapModal">{{location.name}}</a></h5>
+
+	<!-- modal -->
+	<div id="mapModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{location.name}}</h4>
+				</div>
+				<div class="modal-body">
+					<div id="mapModal" class="map">
+						{{> map mapOptions=locationCoordinates}}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default center-block" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- !modal -->
+
 	<h4>{{description}}</h4>
 	{{> interestLevel}}
 	<h5><strong>Going:</strong> {{#each goingUsers}}{{this}}{{/each}}</h5>

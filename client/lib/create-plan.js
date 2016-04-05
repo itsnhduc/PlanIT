@@ -9,18 +9,24 @@ if (Meteor.isClient) {
 			var location = $('#location').val();
 			var visibility = $('[name=v-option]:checked').val();
 
-			Plans.insert({
-				title: title,
-				description: description,
-				location: location,
-				visibility: visibility,
-				participants: [],
-				comments: [],
-				createdAt: new Date(),
-				createdBy: Meteor.userId()
-			});
-			
-			Router.go('/');
+			searchGoogleMaps(location, function(mapLocation) {
+				Plans.insert({
+					title: title,
+					description: description,
+					location: {
+						name: location,
+						latitude: mapLocation.lat,
+						longitude: mapLocation.lng
+					},
+					visibility: visibility,
+					participants: [],
+					comments: [],
+					createdAt: new Date(),
+					createdBy: Meteor.userId()
+				});
+				
+				Router.go('/');
+			});	
 		}
 	});
 

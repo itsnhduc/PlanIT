@@ -52,6 +52,18 @@ if (Meteor.isClient) {
 		},
 		'isCommentOwner': function() {
 			return this.createdBy == Meteor.userId();
+		},
+		locationCoordinates: function() {
+
+			var lat = this.location.latitude;
+			var lng = this.location.longitude;
+			if (GoogleMaps.loaded()) {
+				return { // Singapore's position
+					center: new google.maps.LatLng(lat, lng),
+					zoom: 12
+				};;
+			}
+
 		}
 	});
 
@@ -83,5 +95,23 @@ if (Meteor.isClient) {
 			}
 		}
 	});
+
+	Template.plan.onRendered(function() {
+		$('.modal').on('shown.bs.modal', function () {
+			var mapInstance = GoogleMaps.maps.map.instance;
+			var center = mapInstance.getCenter();
+			google.maps.event.trigger(mapInstance, 'resize');
+			GoogleMaps.maps.map.instance.setCenter(center);
+			var marker = new google.maps.Marker({
+				position: center,
+				map: mapInstance
+			});
+			marker.addListener('click', function() {
+				mapInstance.setZoom(15);
+				mapInstance.setCenter(marker.getPosition());
+			});
+		});
+	});
+
 
 }
