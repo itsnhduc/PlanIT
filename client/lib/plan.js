@@ -96,20 +96,25 @@ if (Meteor.isClient) {
 		}
 	});
 
+	hasSetMarker = false;
+
 	Template.plan.onRendered(function() {
 		$('.modal').on('shown.bs.modal', function () {
-			var mapInstance = GoogleMaps.maps.map.instance;
-			var center = mapInstance.getCenter();
-			google.maps.event.trigger(mapInstance, 'resize');
-			GoogleMaps.maps.map.instance.setCenter(center);
-			var marker = new google.maps.Marker({
-				position: center,
-				map: mapInstance
-			});
-			marker.addListener('click', function() {
-				mapInstance.setZoom(15);
-				mapInstance.setCenter(marker.getPosition());
-			});
+			if (hasSetMarker == false) {
+				hasSetMarker = true;
+				var mapInstance = GoogleMaps.maps.map.instance;
+				var center = mapInstance.getCenter();
+				google.maps.event.trigger(mapInstance, 'resize');
+				GoogleMaps.maps.map.instance.setCenter(center);
+				var marker = new google.maps.Marker({
+					position: center,
+					map: mapInstance
+				});
+				marker.addListener('click', function() {
+					mapInstance.setZoom(15);
+					mapInstance.setCenter(marker.getPosition());
+				});
+			}
 		});
 	});
 

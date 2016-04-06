@@ -27,6 +27,7 @@ if (Meteor.isClient) {
 				Router.go('/plan/' + planId);
 			});
 
+			hasSetMarker = false;
 			
 		},
 		'click #delete': function(event) {
