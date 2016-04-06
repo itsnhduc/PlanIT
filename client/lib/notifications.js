@@ -8,6 +8,10 @@ if (Meteor.isClient) {
 				return 'has confirmed your friend request.';
 			case 'comment':
 				return 'commented on your plan';
+			case 'status going':
+				return 'is going to your event';
+			case 'status interested':
+				return 'is interested to your plan';
 			default:
 				return '(error)'
 		}
@@ -31,7 +35,7 @@ if (Meteor.isClient) {
 				}
 				notifications.push(additionalElements);
 			}
-			return notifications;
+			return notifications.reverse();
 		}
 	});
 

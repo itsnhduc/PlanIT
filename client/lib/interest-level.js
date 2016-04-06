@@ -2,38 +2,18 @@ if (Meteor.isClient) {
 
 	var changeStatus = function(newStatus, plan) {
 		event.preventDefault();
-		var userId = Meteor.userId();
-		var pool = plan.participants;
-		for (var i = 0; i < pool.length; i++) {
-			var user = pool[i];
-			if (user.userId == userId) {
-				if (user.status != newStatus) {
-					Plans.update(plan._id, {$pull: {
-						participants: user
-					}});
-					break;
-				} else {
-					return;
-				}
-			}
-		}
-		Plans.update(plan._id, {$push: {
-			participants: {
-				userId: Meteor.userId(),
-				status: newStatus
-			}
-		}});
+		Meteor.call('indicateStatus', plan._id, Meteor.userId(), newStatus);
 	}
 
 	var getStatusColor = function(status, participants) {
-			var userId = Meteor.userId();
-			for (var i = 0; i < participants.length; i++) {
-				var user = participants[i];
-				if (user.userId == userId && user.status == status) {
-					return 'primary';
-				}
+		var userId = Meteor.userId();
+		for (var i = 0; i < participants.length; i++) {
+			var user = participants[i];
+			if (user.userId == userId && user.status == status) {
+				return 'primary';
 			}
-			return 'default';
+		}
+		return 'default';
 	}
 
 	Template.interestLevel.events({

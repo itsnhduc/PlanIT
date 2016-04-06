@@ -60,16 +60,11 @@ if (Meteor.isServer) {
 			}
 		},
 		'confirmFriend': function(requesterId) {
-			Meteor.users.update({_id: Meteor.userId()}, {$pull: {
-				'profile.friends': {
-					_id: requesterId
-				}
-			}});
-			Meteor.users.update({_id: Meteor.userId()}, {$addToSet: {
-				'profile.friends': {
-					_id: requesterId,
-					isConfirmed: true
-				}
+			Meteor.users.update({
+				_id: Meteor.userId(),
+				'profile.friends._id': requesterId
+			}, {$set: {
+				'profile.friends.$.isConfirmed': true
 			}});
 			Meteor.users.update({_id: requesterId}, {$addToSet: {
 				'profile.friends': {
@@ -114,16 +109,30 @@ if (Meteor.isServer) {
 					text: comment.text
 				}
 			}});
-			console.log(comment.createdBy);
-			console.log(plan.createdBy);
 			if (plan.createdBy != comment.createdBy) {
-				console.log('yes');
 				Meteor.users.update({_id: plan.createdBy}, {$pull: {
 					'profile.notifications': {
 						userId: comment.createdBy,
 						action: 'comment',
 						planId: plan._id
 					} 
+				}});
+			}
+		},
+		'indicateStatus': function(planId, userId, newStatus) {
+			if (Plans.findOne({'participants.userId': userId})) {
+				Plans.update({
+					_id: planId,
+					'participants.userId': userId
+				}, {$set: {
+					'participants.$.status': newStatus
+				}});
+			} else {
+				Plans.update(planId, {$push: {
+					participants: {
+						userId: userId,
+						status: newStatus
+					}
 				}});
 			}
 		}
