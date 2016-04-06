@@ -89,6 +89,43 @@ if (Meteor.isServer) {
 					action: 'friend confirm'
 				}
 			}});
+		},
+		'addComment': function(plan, text) {
+			Plans.update(plan._id, {$addToSet: {
+				comments: {
+					createdBy: Meteor.userId(),
+					text: text
+				}
+			}});
+			if (plan.createdBy != Meteor.userId()) {
+				Meteor.users.update({_id: plan.createdBy}, {$addToSet: {
+					'profile.notifications': {
+						userId: Meteor.userId(),
+						action: 'comment',
+						planId: plan._id
+					} 
+				}});
+			}
+		},
+		'deleteComment': function(plan, comment) {
+			Plans.update({_id: plan._id}, {$pull: {
+				comments: {
+					createdBy: comment.createdBy,
+					text: comment.text
+				}
+			}});
+			console.log(comment.createdBy);
+			console.log(plan.createdBy);
+			if (plan.createdBy != comment.createdBy) {
+				console.log('yes');
+				Meteor.users.update({_id: plan.createdBy}, {$pull: {
+					'profile.notifications': {
+						userId: comment.createdBy,
+						action: 'comment',
+						planId: plan._id
+					} 
+				}});
+			}
 		}
 	});
 }

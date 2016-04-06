@@ -75,23 +75,14 @@ if (Meteor.isClient) {
 		'click #add-comment': function(event) {
 			event.preventDefault();
 			var comment = $('#comment-input').val();
-			Plans.update(this._id, {$addToSet: {
-				comments: {
-					createdBy: Meteor.userId(),
-					text: comment
-				}
-			}});
+			Meteor.call('addComment', this, comment);
 			$('#comment-input').val('');
 		},
 		'click #delete-comment': function(event) {
 			event.preventDefault();
 			if (confirm('Delete this comment?')) {
-				Plans.update(this.planId, {$pull: {
-					comments: {
-						createdBy: this.createdBy,
-						text: this.text
-					}
-				}});
+				var plan = Plans.findOne(this.planId);
+				Meteor.call('deleteComment', plan, this);
 			}
 		}
 	});

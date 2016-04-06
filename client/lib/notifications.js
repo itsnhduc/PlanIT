@@ -3,9 +3,11 @@ if (Meteor.isClient) {
 	var generateActionNoti = function(actionType) {
 		switch (actionType) {
 			case 'friend request':
-				return 'has sent you a friend request.'
+				return 'has sent you a friend request.';
 			case 'friend confirm':
-				return 'has confirmed your friend request.'
+				return 'has confirmed your friend request.';
+			case 'comment':
+				return 'commented on your plan';
 			default:
 				return '(error)'
 		}
@@ -18,11 +20,16 @@ if (Meteor.isClient) {
 			for (var i = 0; i < pool.length; i++) {
 				var curNoti = pool[i];
 				var targetUser = Meteor.users.findOne(curNoti.userId);
-				notifications.push({
+				var additionalElements = {
 					name: targetUser.profile.firstname + ' ' + targetUser.profile.lastname,
 					targetUserId: targetUser._id,
 					action: generateActionNoti(curNoti.action)
-				});
+				}
+				if (curNoti.planId) {
+					additionalElements.planId = curNoti.planId;
+					additionalElements.planName = Plans.findOne(curNoti.planId).title;
+				}
+				notifications.push(additionalElements);
 			}
 			return notifications;
 		}

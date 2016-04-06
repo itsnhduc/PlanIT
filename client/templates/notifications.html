@@ -3,7 +3,13 @@
 	<ul class="list-group">
 		{{#each notifications}}
 			<li class="list-group-item">
-				<p><strong><a href="/user/{{targetUserId}}">{{name}}</a></strong> {{action}}</p>
+				<p>
+					<strong><a href="/user/{{targetUserId}}">{{name}}</a></strong>
+					 {{action}}
+					{{#if planId}}
+				 	<strong><a href="/plan/{{planId}}">({{planName}})</a></strong>
+				 	{{/if}}
+				</p>
 			</li>
 		{{/each}}
 	</ul>
