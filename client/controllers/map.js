@@ -48,7 +48,3 @@ searchGoogleMaps = function(query, callback) {
 		callback(location);
 	});
 }
-
-Meteor.startup(function() {	
-	GoogleMaps.load();
-});

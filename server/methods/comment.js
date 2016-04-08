@@ -1,6 +1,5 @@
 Meteor.methods({
 	'addComment': function(plan, text) {
-		console.log('server!');
 		Plans.update(plan._id, {$addToSet: {
 			comments: {
 				createdBy: Meteor.userId(),

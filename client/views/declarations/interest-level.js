@@ -1,26 +1,14 @@
-var changeStatus = function(newStatus, plan) {
-	Meteor.call('indicateStatus', plan._id, Meteor.userId(), newStatus);
-}
-
-var getStatusColor = function(status, participants) {
-	var userId = Meteor.userId();
-	for (var i = 0; i < participants.length; i++) {
-		var user = participants[i];
-		if (user.userId == userId && user.status == status) {
-			return 'primary';
-		}
-	}
-	return 'default';
-}
-
 Template.interestLevel.events({
 	'click .going': function(event) {
+		event.preventDefault();
 		changeStatus('going', this);
 	},
 	'click .interested': function(event) {
+		event.preventDefault();
 		changeStatus('interested', this);
 	},
 	'click .not-going': function(event) {
+		event.preventDefault();
 		changeStatus('not going', this);
 	}
 });
@@ -34,12 +22,5 @@ Template.interestLevel.helpers({
 	},
 	'colorNotGoing': function() {
 		return getStatusColor('not going', this.participants);
-	},
-	'showBtnGroup': function() {
-		if (this.createdBy == Meteor.userId()) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 });

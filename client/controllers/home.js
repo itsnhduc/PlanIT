@@ -1,0 +1,35 @@
+login = function() {
+	var email = $('#login-email').val();
+	var password  =$('#login-password').val();
+	Meteor.loginWithPassword(email, password, function(err) {
+		if (err) {
+			throw new Meteor.Error('Logout failed');
+		} else {
+			Router.go('/');
+		}
+	});
+}
+register = function() {
+	var firstname = $('#reg-firstname').val();
+	var lastname = $('#reg-lastname').val();
+	var email = $('#reg-email').val();
+	var password = $('#reg-password').val();
+	
+	Accounts.createUser({
+		email: email,
+		password: password,
+		profile: {
+			firstname: firstname,
+			lastname: lastname,
+			friends: []
+		},
+		notifications: []
+	});
+	Meteor.loginWithPassword(email, password, function(err) {
+		if (err) {
+			throw new Meteor.Error('Logout failed');
+		} else {
+			Router.go('/');
+		}
+	});
+}

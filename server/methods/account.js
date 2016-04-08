@@ -1,5 +1,5 @@
 Meteor.methods({
-	'updateProfile': function(firstname, lastname, email) {
+	'updateProfile': function(wrap) {
 		Meteor.users.update({_id: Meteor.userId()}, {$set: wrap});
 	},
 	'removeAccount': function(id) {
