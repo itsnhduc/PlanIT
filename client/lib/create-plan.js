@@ -10,7 +10,7 @@ if (Meteor.isClient) {
 			var visibility = $('[name=v-option]:checked').val();
 
 			searchGoogleMaps(location, function(mapLocation) {
-				Plans.insert({
+				var wrap = {
 					title: title,
 					description: description,
 					location: {
@@ -23,9 +23,16 @@ if (Meteor.isClient) {
 					comments: [],
 					createdAt: new Date(),
 					createdBy: Meteor.userId()
+				};
+
+				Meteor.call('addPlan', wrap, function(err) {
+					if (err) {
+						throw new Meteor.Error(err);
+					} else {
+						Router.go('/');
+					}
 				});
 				
-				Router.go('/');
 			});	
 		}
 	});

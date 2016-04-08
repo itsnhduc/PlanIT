@@ -12,7 +12,7 @@ if (Meteor.isClient) {
 			var planId = this._id;
 
 			searchGoogleMaps(location, function(mapLocation) {
-				Plans.update(planId, {$set: {
+				var wrap = {
 					title: title,
 					description: description,
 					location: {
@@ -22,18 +22,23 @@ if (Meteor.isClient) {
 					},
 					visibility: visibility,
 					createdBy: Meteor.userId()
-				}});
-				
-				Router.go('/plan/' + planId);
+				};
+				Meteor.call('updatePlan', planId, wrap, function(err) {
+					if (err) {
+						throw new Meteor.Error(err);
+					} else {
+						hasSetMarker = false;
+						Router.go('/plan/' + planId);
+					}	
+				});
 			});
 
-			hasSetMarker = false;
 			
 		},
 		'click #delete': function(event) {
 			event.preventDefault();
 			if (confirm('Are you sure you want to delete this plan?')) {
-				Plans.remove(this._id);
+				Meteor.call('deletePlan', this._id);
 				Router.go('/');
 			}
 		}
