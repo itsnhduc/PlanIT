@@ -3,3 +3,7 @@
 	max-width: 100%;
 	height: 400px;
 }
+.error-text {
+	color: red;
+	font-weight: bold;
+}

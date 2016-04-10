@@ -1,3 +1,4 @@
+// >>>>>>>> Plan Info <<<<<<<<
 getOrganizer = function(plan) {
 	if (plan.createdBy == Meteor.userId()) {
 		return 'You';
@@ -46,8 +47,10 @@ isCommentOwner = function(comment) {
 
 addComment = function(plan) {
 	var comment = $('#comment-input').val();
-	Meteor.call('addComment', plan, comment);
-	$('#comment-input').val('');
+	if (comment != '') {
+		Meteor.call('addComment', plan, comment);
+		$('#comment-input').val('');
+	}
 }
 
 deleteComment = function(comment) {
@@ -55,4 +58,104 @@ deleteComment = function(comment) {
 		var plan = Plans.findOne(comment.planId);
 		Meteor.call('deleteComment', plan, comment);
 	}
+}
+
+// >>>>>>>> Plan Settings <<<<<<<<
+var checkPlanError = function(planData, method) {
+
+	var blankError = false;
+	$.each(planData, function(key, value) {
+		if (value == '') {
+			blankError = true;
+		}
+	});
+
+	if (blankError) {
+		$('#plan-error').text('You cannot leave any field blank.');
+	} else {
+		method();
+	}
+
+}
+
+submitPlan = function() {
+	var title = $('#title').val();
+	var description = $('#description').val();
+	var location = $('#location').val();
+	var visibility = $('[name=v-option]:checked').val();
+
+	checkPlanError([title, description, location, visibility], function() {
+		searchGoogleMaps(location, function(mapLocation) {
+			var wrap = {
+				title: title,
+				description: description,
+				location: {
+					name: location,
+					latitude: mapLocation.lat,
+					longitude: mapLocation.lng
+				},
+				visibility: visibility,
+				participants: [],
+				comments: [],
+				createdAt: new Date(),
+				createdBy: Meteor.userId()
+			};
+
+			Meteor.call('addPlan', wrap, function(err) {
+				if (err) {
+					throw new Meteor.Error(err);
+				} else {
+					Router.go('/');
+				}
+			});
+		});
+	});
+	
+}
+
+editPlan = function(plan) {
+	var title = $('#title').val();
+	var location = $('#location').val();
+	var description = $('#description').val();
+	var visibility = $('[name=v-option]:checked').val();
+
+	var planId = plan._id;
+
+	checkPlanError([title, description, location, visibility], function() {
+		searchGoogleMaps(location, function(mapLocation) {
+			var wrap = {
+				title: title,
+				description: description,
+				location: {
+					name: location,
+					latitude: mapLocation.lat,
+					longitude: mapLocation.lng
+				},
+				visibility: visibility,
+				createdBy: Meteor.userId()
+			};
+			Meteor.call('updatePlan', planId, wrap, function(err) {
+				if (err) {
+					throw new Meteor.Error(err);
+				} else {
+					resetMarker();
+					Router.go('/plan/' + planId);
+				}	
+			});
+		});
+	})
+
+
+}
+
+deletePlan = function(plan) {
+	if (confirm('Are you sure you want to delete this plan?')) {
+		Meteor.call('deletePlan', plan._id);
+		Router.go('/');
+	}
+}
+
+initVisibility = function(template) {
+	var visibility = template.data.visibility;
+	$('#v-' + visibility).attr('checked', 'checked');
 }
