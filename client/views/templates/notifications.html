@@ -2,6 +2,8 @@
 	<ul class="dropdown-menu">
 		{{#each notifications}}
 			<li>
+				
+				{{#unless empty}}
 				<a href="
 					{{#if planId}}
 						/plan/{{planId}}
@@ -15,6 +17,9 @@
 				 	<strong>{{planName}}</strong>
 				 	{{/if}}
 				</a>
+			 	{{else}}
+			 		<p class="no-noti text-center">(nothing to show here)</p>
+			 	{{/unless}}
 			</li>
 		{{/each}}
 	</ul>

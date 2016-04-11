@@ -59,6 +59,7 @@ mobile-experience@1.0.2
 mobile-status-bar@1.0.10
 modules@0.5.1
 modules-runtime@0.6.1
+momentjs:moment@2.8.4
 mongo@1.1.5
 mongo-id@1.0.2
 npm-bcrypt@0.7.8_2
@@ -84,6 +85,7 @@ standard-minifier-js@1.0.4
 templating@1.1.7
 templating-tools@1.0.2
 tracker@1.0.11
+tsega:bootstrap3-datetimepicker@4.17.37_1
 twbs:bootstrap@3.3.6
 ui@1.0.9
 underscore@1.0.6

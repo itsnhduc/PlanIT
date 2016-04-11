@@ -73,7 +73,7 @@ var checkPlanError = function(planData, method) {
 	});
 
 	if (blankError) {
-		$('#plan-error').text('You cannot leave any field blank.');
+		$('#plan-error').text('You cannot leave any mandatory field blank.');
 	} else {
 		method();
 	}
@@ -83,14 +83,16 @@ var checkPlanError = function(planData, method) {
 submitPlan = function() {
 	var title = $('#title').val();
 	var description = $('#description').val();
+	var datetime = $('#datetime').val();
 	var location = $('#location').val();
 	var visibility = $('[name=v-option]:checked').val();
 
-	checkPlanError([title, description, location, visibility], function() {
+	checkPlanError([title, description, location, visibility, datetime], function() {
 		searchGoogleMaps(location, function(mapLocation) {
 			var wrap = {
 				title: title,
 				description: description,
+				datetime: datetime,
 				location: {
 					name: location,
 					latitude: mapLocation.lat,
@@ -122,16 +124,18 @@ submitPlan = function() {
 editPlan = function(plan) {
 	var title = $('#title').val();
 	var location = $('#location').val();
+	var datetime = $('#datetime').val();
 	var description = $('#description').val();
 	var visibility = $('[name=v-option]:checked').val();
 
 	var planId = plan._id;
 
-	checkPlanError([title, description, location, visibility], function() {
+	checkPlanError([title, description, location, visibility, datetime], function() {
 		searchGoogleMaps(location, function(mapLocation) {
 			var wrap = {
 				title: title,
 				description: description,
+				datetime: datetime,
 				'location.name': location,
 				'location.latitude': mapLocation.lat,
 				'location.longitude': mapLocation.lng,
@@ -162,4 +166,29 @@ deletePlan = function(plan) {
 initVisibility = function(template) {
 	var visibility = template.data.visibility;
 	$('#v-' + visibility).attr('checked', 'checked');
+}
+
+convertDate = function(plan) {
+	var datetime = new Date(plan.datetime);
+
+	var month = datetime.getMonth();
+	var day = datetime.getDate();
+	var year = datetime.getFullYear();
+	var time = formatAMPM(datetime);
+
+	month = (month < 10 ? '0' : '') + (month + 1);
+	day = (day < 10 ? '0' : '') + day
+
+	return month + '/' + day + '/' + year + ' ' + time;
+}
+
+var formatAMPM = function(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
 }

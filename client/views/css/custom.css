@@ -18,7 +18,7 @@ html, body, .nav, .navbar-blue, small.text-muted {
 .navbar-right {
 	margin-right: 8px;
 }
-input, textarea, span {
+input, textarea, span, .btn {
 	border-radius: 0px !important;
 }
 .new {
@@ -37,6 +37,10 @@ table {
 }
 .status-btn {
 	width: 91px;
+}
+.no-noti {
+	font-style: italic;
+	color: gray;
 }
 
 /* view plan detail*/

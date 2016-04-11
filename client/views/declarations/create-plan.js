@@ -4,3 +4,7 @@ Template.createPlan.events({
 		submitPlan();
 	}
 });
+
+Template.createPlan.onRendered(function() {
+	$('#datetime').datetimepicker();
+});

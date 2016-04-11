@@ -12,10 +12,6 @@
 						<div class="col-sm-6">
 							<div class="interest-level">
 								{{> interestLevel}}
-								&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-default" onclick="window.history.back();">
-									<i class="fa fa-times" aria-hidden="true"></i>
-								</button>
 							</div>
 						</div>
 					</div>
@@ -41,6 +37,10 @@
 							<a href="/user/{{createdBy}}"> {{organizer}}</a>
 						</li>
 						<li>
+							<strong style="text-decoration: underline;">Date and time:</strong>
+							<a href="#" class="location"> {{datetime}}</a>
+						</li>
+						<li>
 							<strong style="text-decoration: underline;">Location:</strong>
 							<a href="#" class="location" data-toggle="modal" data-target="#mapModal"> {{location.name}}</a>
 						</li>
@@ -63,7 +63,7 @@
 					<ul>
 					{{#each comments}}
 						<li>
-							<strong>{{name}}:</strong> {{text}}
+							<a href="/user/{{createdBy}}"><strong>{{name}}:</strong></a> {{text}}
 							{{#if isCommentOwner}}
 								 - <a id="delete-comment" href="#">Delete</a>
 							{{/if}}

@@ -24,13 +24,19 @@ getNotifications = function() {
 		var additionalElements = {
 			name: getFullName(targetUser),
 			targetUserId: targetUser._id,
-			action: generateActionNoti(curNoti.action)
+			action: generateActionNoti(curNoti.action),
+			empty: false
 		}
 		if (curNoti.planId) {
 			additionalElements.planId = curNoti.planId;
 			additionalElements.planName = Plans.findOne(curNoti.planId).title;
 		}
 		notifications.push(additionalElements);
+	}
+	if (notifications.length == 0) {
+		notifications.push({
+			empty: true
+		});
 	}
 	return notifications.reverse();
 }

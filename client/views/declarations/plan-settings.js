@@ -9,6 +9,13 @@ Template.planSettings.events({
 	}
 });
 
+Template.planSettings.helpers({
+	'datetime': function() {
+		return convertDate(this);
+	}
+});
+
 Template.planSettings.onRendered(function() {
+	$('#datetime').datetimepicker();
 	initVisibility(this);
 });
