@@ -126,11 +126,9 @@ editPlan = function(plan) {
 			var wrap = {
 				title: title,
 				description: description,
-				location: {
-					name: location,
-					latitude: mapLocation.lat,
-					longitude: mapLocation.lng
-				},
+				'location.name': location,
+				'locattion.latitude': mapLocation.lat,
+				'locattion.longitude': mapLocation.lng,
 				visibility: visibility,
 				createdBy: Meteor.userId()
 			};

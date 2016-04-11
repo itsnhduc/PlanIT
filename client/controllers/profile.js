@@ -114,10 +114,8 @@ editProfile = function(user) {
 
 	var wrap = {
 		emails: [{address: email, verified: false}],
-		profile: {
-			firstname: firstname,
-			lastname: lastname
-		}
+		'profile.firstname': firstname,
+		'profile.lastname': lastname
 	};
 
 	Meteor.call('updateProfile', wrap);
