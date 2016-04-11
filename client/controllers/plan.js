@@ -127,8 +127,8 @@ editPlan = function(plan) {
 				title: title,
 				description: description,
 				'location.name': location,
-				'locattion.latitude': mapLocation.lat,
-				'locattion.longitude': mapLocation.lng,
+				'location.latitude': mapLocation.lat,
+				'location.longitude': mapLocation.lng,
 				visibility: visibility,
 				createdBy: Meteor.userId()
 			};
