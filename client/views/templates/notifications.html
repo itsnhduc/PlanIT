@@ -1,15 +1,20 @@
 <template name="notifications">
-	<h1>Notifications</h1>
-	<ul class="list-group">
+	<ul class="dropdown-menu">
 		{{#each notifications}}
-			<li class="list-group-item">
-				<p>
-					<strong><a href="/user/{{targetUserId}}">{{name}}</a></strong>
+			<li>
+				<a href="
+					{{#if planId}}
+						/plan/{{planId}}
+					{{else}}
+						/user/{{targetUserId}}
+					{{/if}}
+				">
+					<strong>{{name}}</strong>
 					 {{action}}
 					{{#if planId}}
-				 	<strong><a href="/plan/{{planId}}">({{planName}})</a></strong>
+				 	<strong>{{planName}}</strong>
 				 	{{/if}}
-				</p>
+				</a>
 			</li>
 		{{/each}}
 	</ul>

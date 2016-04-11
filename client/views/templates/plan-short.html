@@ -1,8 +1,13 @@
 <template name="planShort">
-	<h3>
-		<a href="/plan/{{_id}}">&raquo;{{title}}</a>
-	</h3>
-	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
-	<h4>{{description}}</h4>
-	{{> interestLevel}}
+	<a href="/plan/{{_id}}" class="row newsfeed-plan" style="cursor: pointer">
+		<div class="col-sm-7">
+			<h1>{{title}}</h1>
+			<h4>{{description}}</h4>
+		</div>
+		<div class="col-sm-5">
+			<div class="interest-level">
+				{{> interestLevel}}
+			</div>
+		</div>
+	</a>
 </template>

@@ -1,53 +1,62 @@
 <template name="home">
-	<h1>Home</h1>
-	{{#if currentUser}}
-		<h2>Hi {{currentUser.profile.firstname}}, check out your <a href="/">Newsfeed</a>.</h2> 
-	{{else}}
-	<main class="row">
-		<section class="col-md-6">
-			<h2>Login</h2>
-			<form id="form-login">
-				<div class="form-group">
-					<input class="form-control" type="email" id="login-email" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="password" id="login-password" placeholder="Password">
-				</div>
-				<div class="form-group">
-					<p id="login-error" class="error-text"></p>
-					<button id="login" type="submit" class="btn btn-primary">
-						Login
-					</button>
-				</div>
-			</form>
-		</section>
-		<section class="col-md-6">
-			<h2>Register</h2>
-			<form>
-				<div class="form-group">
-					<input class="form-control" type="text" id="reg-firstname" placeholder="First name">
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" id="reg-lastname" placeholder="Last name">
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="email" id="reg-email" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="password" id="reg-password" placeholder="Password">
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="password" id="reg-repassword" placeholder="Re-type Password">
-				</div>
-				<div class="form-group">
-					<p id="register-error" class="error-text"></p>
-					<button id="register" type="submit" class="btn btn-primary sh-active-element">
-						Register
-					</button>
-				</div>
-			</form>
-		</section>
-	</main>
-	{{/if}}
+
+	<div class="panel panel-default">
+		<div class="panel-heading text-center">
+			<h1>
+			<img src="/img/logo.jpg" class="app-logo">
+			PlanIT
+			</h1>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<section class="col-md-6">
+					<h3>Login</h3>
+					<form id="form-login">
+						<div class="form-group">
+							<input class="form-control" type="email" id="login-email" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" id="login-password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<p id="login-error" class="error-text"></p>
+							<button id="login" type="submit" class="btn btn-primary">
+								Login
+							</button>
+						</div>
+					</form>
+				</section>
+				<section class="col-md-6">
+					<h3>Register</h3>
+					<form>
+						<div class="form-group">
+							<input class="form-control" type="text" id="reg-firstname" placeholder="First name">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="text" id="reg-lastname" placeholder="Last name">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="email" id="reg-email" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" id="reg-password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" id="reg-repassword" placeholder="Re-type Password">
+						</div>
+						<div class="form-group">
+							<p id="register-error" class="error-text"></p>
+							<button id="register" type="submit" class="btn btn-primary sh-active-element">
+								Register
+							</button>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+
+
+	
 	
 </template>

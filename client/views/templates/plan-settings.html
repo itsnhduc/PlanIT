@@ -1,29 +1,53 @@
 <template name="planSettings">
-	<h1>Plan Settings</h1>
-	<div class="form-group">
-		<input id="title" type="text" class="form-control" value="{{title}}" placeholder="Give your plan a title">
-	</div>
-	<div class="form-group">
-		<input id="location" type="text" class="form-control" value="{{location.name}}" placeholder="Where will it happen?">
-	</div>
-	<div class="form-group">
-		<textarea id="description" class="form-control" value="{{description}}" placeholder="How's the plan like?"></textarea>
-	</div>
-	<div class="form-group">
-		<label class="radio-inline">
-			<input id="v-public" type="radio" name="v-option" value="public">Public
-		</label>
-		<label class="radio-inline">
-			<input id="v-friends" type="radio" name="v-option" value="friends">Friends
-		</label>
-		<label class="radio-inline">
-			<input id="v-private" type="radio" name="v-option" value="private">Private
-		</label>
-	</div>
-	<div class="form-group">
-		<p id="plan-error" class="error-text"></p>
-		<button id="submit" class="btn btn-primary">Save changes</button>
-		<button id="delete" class="btn btn-danger">Delete plan</button>
-		<a id="cancel" class="btn btn-default" onclick="window.history.back();">Cancel</a>
+	<div class="well">
+		<form class="form-horizontal" role="form">
+			<div class="new">
+				<h4>Plan Settings</h4>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<input id="title" type="text" class="form-control" value="{{title}}" placeholder="Title">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<textarea id="description" class="form-control" value="{{description}}" placeholder="How's the plan like?"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="input-group">
+								<span class="input-group-addon" id="basic-addon1">at</span>
+								<input id="location" type="text" class="form-control" value="{{location.name}}" placeholder="Where will it happen?">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="row" style="margin-top: 2px">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="radio-inline">
+								<input id="v-public" type="radio" name="v-option" value="public">Public
+							</label>
+							<label class="radio-inline">
+								<input id="v-friends" type="radio" name="v-option" value="friends">Friends
+							</label>
+							<label class="radio-inline">
+								<input id="v-private" type="radio" name="v-option" value="private">Private
+							</label>
+							<label id="plan-error" class="error-text"></label>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group" style="float:right">
+							<button id="submit" class="btn btn-primary">Save changes</button>
+							<button id="delete" class="btn btn-danger">Delete plan</button>
+							<a id="cancel" class="btn btn-default" onclick="window.history.back();">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </template>

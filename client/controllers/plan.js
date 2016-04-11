@@ -15,10 +15,12 @@ getParticipants = function(plan, status) {
 		var cur = pool[i];
 		if (cur.status == status) {
 			var user = Meteor.users.findOne(cur.userId);
-			names.push(getFullName(user) + ', ');
+			names.push({
+				name: getFullName(user),
+				userId: cur.userId
+			});
 		}
 	}
-	names[names.length - 1] = names[names.length - 1].replace(', ', '');
 	return names;
 }
 
@@ -105,6 +107,10 @@ submitPlan = function() {
 				if (err) {
 					throw new Meteor.Error(err);
 				} else {
+					$('#title').val('');
+					$('#description').val('');
+					$('#location').val('');
+					$('#plan-error').text('');
 					Router.go('/');
 				}
 			});

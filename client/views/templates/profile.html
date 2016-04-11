@@ -1,48 +1,56 @@
 <template name="profile">
-	<div class="info-container">
-		<h1>User Profile</h1>
-		<h2>{{profile.firstname}} {{profile.lastname}}</h2>
-		<p><span style="font-weight: bold">First name: </span>{{profile.firstname}}</p>
-		<p><span style="font-weight: bold">Last name: </span>{{profile.lastname}}</p>
-		{{#if isOwner}} <!-- Private info -->
-			<p><span style="font-weight: bold">Email: </span><a href="mailto:{{email}}">{{email}}</a></p>
-			<button id="settings" class="btn btn-primary">Profile settings</button>
-		{{/if}}
-	</div>
 
-	<div class="relationship-container">
-		{{#unless isOwner}}
-			{{#if isBeingRequested}}
-				<button id="accept-request" class="btn btn-primary">+ Accept friend request</button>
-			{{else}}
-				{{#if isFriend}}
-					<button id="unfriend" class="btn btn-danger">&times; Unfriend</button>
+	<div class="col-sm-5">
+		<div class="panel panel-default">
+			<div class="panel-body text-center" draggable="true">
+				<h3>{{profile.firstname}} {{profile.lastname}}</h3>
+				<p>{{plans.count}} Plan(s), {{friends.count}} Friend(s)</p>
+				{{#if isOwner}} <!-- Private info -->
+					<p>{{email}}</p>
+					<button id="settings" class="btn btn-primary">Profile settings</button>
 				{{else}}
-					{{#if hasRequested}}
-						<button id="cancel-request" class="btn btn-success">&#x2713; Friend request sent</button>
-					{{else}}
-						<button id="add-friend" class="btn btn-primary">+ Add friend</button>
-					{{/if}}
+					<div class="relationship">
+						{{#unless isOwner}}
+							{{#if isBeingRequested}}
+								<button id="accept-request" class="btn btn-primary">+ Accept friend request</button>
+							{{else}}
+								{{#if isFriend}}
+									<button id="unfriend" class="btn btn-danger">&times; Unfriend</button>
+								{{else}}
+									{{#if hasRequested}}
+										<button id="cancel-request" class="btn btn-success">&#x2713; Friend request sent</button>
+									{{else}}
+										<button id="add-friend" class="btn btn-primary">+ Add friend</button>
+									{{/if}}
+								{{/if}}
+							{{/if}}
+						{{/unless}}
+					</div>
 				{{/if}}
-			{{/if}}
-		{{/unless}}
-	</div>
-
-	<br>
-
-	<div class="friends-container">
-		<h3>Friends</h3>
-		{{#each friends}}
-			<a href="/user/{{_id}}">{{name}}</a>
-		{{/each}}
-	</div>
-
-	<br>
-
-	<div class="plans-container">
-		<h3>Plans</h3>
-		{{#each plans}}
-			{{> planShort}}
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Friends</h4>
+			</div>
+			<div class="panel-body">
+				<ul>
+					{{#each friends.entries}}
+						<li>
+							<a href="/user/{{_id}}">{{name}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+	</div><!-- main col right -->
+	<div class="col-sm-7">
+		{{#each plans.entries}}
+			<div class="panel panel-default">
+				<div class="panel-body">
+					{{> planShort}}
+				</div>
+			</div>
 		{{/each}}
 	</div>
 </template>

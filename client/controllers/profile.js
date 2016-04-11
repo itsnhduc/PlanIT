@@ -13,7 +13,7 @@ getFriendsIds = function() {
 }
 
 getProfilePlans = function(user) {
-	return Plans.find({createdBy: user._id}, {$or: [{
+	var entries = Plans.find({createdBy: user._id}, {$or: [{
 		visibility: 'public' // public plan
 	}, {
 		createdBy: Meteor.userId() // own plan
@@ -23,6 +23,10 @@ getProfilePlans = function(user) {
 	}, {
 		'participants.userId': Meteor.userId() // plans in which user is a participant
 	}]});
+	return {
+		entries: entries,
+		count: entries.fetch().length
+	}
 }
 
 getEmail = function(user) {
@@ -45,7 +49,11 @@ getFriends = function(user) {
 			name: curFriendFirstName + ' ' + curFriendLastName
 		});
 	}
-	return friends;
+	console.log(friends);
+	return {
+		entries: friends,
+		count: friends.length
+	};
 }
 
 isBeingRequested = function(user) {
@@ -112,22 +120,25 @@ editProfile = function(user) {
 	var lastname = $('#lastname').val();
 	var email = $('#email').val();
 
-	var wrap = {
-		emails: [{address: email, verified: false}],
-		'profile.firstname': firstname,
-		'profile.lastname': lastname
-	};
-
-	Meteor.call('updateProfile', wrap);
-
 	var passwordOld = $('#password-old').val();
 	var passwordNew = $('#password-new').val();
 
-	if (passwordOld != '' && passwordNew != '') {
-		Accounts.changePassword(passwordOld, passwordNew);
-	}
+	checkAuthError([email, passwordOld, passwordNew, firstname, lastname], 'profile', function() {
+		var wrap = {
+			emails: [{address: email, verified: false}],
+			'profile.firstname': firstname,
+			'profile.lastname': lastname
+		};
+		Meteor.call('updateProfile', wrap);
 
-	Router.go('/user/' + user._id);
+		if (passwordOld != '' && passwordNew != '') {
+			Accounts.changePassword(passwordOld, passwordNew);
+		}
+		Router.go('/user/' + user._id);
+	});
+
+
+
 }
 
 deleteAccount = function(user) {

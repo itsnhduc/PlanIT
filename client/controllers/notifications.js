@@ -1,9 +1,9 @@
 var generateActionNoti = function(actionType) {
 	switch (actionType) {
 		case 'friend request':
-			return 'has sent you a friend request.';
+			return 'has sent you a friend request';
 		case 'friend confirm':
-			return 'has confirmed your friend request.';
+			return 'has confirmed your friend request';
 		case 'comment':
 			return 'commented on your plan';
 		case 'status going':

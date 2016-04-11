@@ -12,11 +12,11 @@ var errorObjectHandler = function(error) {
 	}
 }
 
-var authErrorHandler = function(error, action) {
+var authErrorHandler = function(error, target) {
 	var errorMessage;
 	switch (error) {
 		case 'blank':
-			errorMessage = 'You cannot leave any field blank.';
+			errorMessage = 'You cannot leave any mandatory field blank.';
 			break;
 		case 'invalid email':
 			errorMessage = 'Invalid email format.';
@@ -27,24 +27,30 @@ var authErrorHandler = function(error, action) {
 		default: // error object returned
 			errorMessage = errorObjectHandler(error);
 	}
-	$('#' + action + '-error').text(errorMessage);
+	$('#' + target + '-error').text(errorMessage);
 }
 
-var checkAuthError = function(authData, action, method) {
+checkAuthError = function(authData, target, method) {
 	var blankError = false;
+	var blankInput = [];
 	$.each(authData, function(key, value) {
 		if (value == '') {
+			blankInput.push(key);
 			blankError = true;
 		}
 	});
 
-	// authData = [<email>, <password>, <else>...]
+	if (target == 'profile' && blankInput.toString() == '1,2') {
+		blankError = false;
+	}
+
+	// authData = [<email>, <password>, <repassword>, <else>...]
 	if (blankError) {
-		authErrorHandler('blank', action);
+		authErrorHandler('blank', target);
 	} else if (authData[0].indexOf('@') == -1 || authData[0].indexOf('.') == -1) {
-		authErrorHandler('invalid email', action);
+		authErrorHandler('invalid email', target);
 	} else if (authData[1] != authData[2] && authData[2] != undefined) {
-		authErrorHandler('password unmatched', action);
+		authErrorHandler('password unmatched', target);
 	} else {
 		method();
 	}

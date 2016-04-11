@@ -1,0 +1,67 @@
+<template name="profileSettings">
+	<div class="well">
+		<form class="form-horizontal" role="form">
+			<div class="new">
+				<h4>Profile Settings</h4>
+				<form>
+					
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<p style="font-weight: bold">Basic info</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input class="form-control" type="text" id="firstname" placeholder="First name" value="{{currentUser.profile.firstname}}">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input class="form-control" type="text" id="lastname" placeholder="Last name" value="{{currentUser.profile.lastname}}">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input class="form-control" type="email" id="email" placeholder="Email" value="{{email}}">
+								</td>
+							</tr>
+							<tr>
+								<td><br></td>
+							</tr>
+							<tr>
+								<td>
+									<p style="font-weight: bold">Password change (leave blank if not applicable)</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input class="form-control" type="password" id="password-old" placeholder="Old Password">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input class="form-control" type="password" id="password-new" placeholder="New Password">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="row" style="margin-top: 2px">
+						<div class="col-sm-6">
+							<label id="profile-error" class="error-text"></label>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group" style="float:right">
+								<button id="submit" class="btn btn-primary">Save changes</button>
+								<button id="delete" class="btn btn-danger">Delete account</button>
+								<a id="cancel" class="btn btn-default" onclick="window.history.back();">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</form>
+	</div>
+</template>

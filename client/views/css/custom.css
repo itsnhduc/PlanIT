@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
 .map-container {
 	width: 100%;
 	max-width: 100%;
@@ -6,4 +7,51 @@
 .error-text {
 	color: red;
 	font-weight: bold;
+}
+html, body, .nav, .navbar-blue, small.text-muted {
+	font-family: 'Lato' !important;
+}
+.interest-level {
+	margin-top: 20px;
+	float: right;
+}
+.navbar-right {
+	margin-right: 8px;
+}
+input, textarea, span {
+	border-radius: 0px !important;
+}
+.new {
+	margin: 0 20px 0 20px;
+}
+.app-logo {
+	width: 50px;
+	height: 50px;
+	display: inline;
+}
+.dropdown-menu > li {
+	cursor: pointer;
+}
+table {
+	width: 100%;
+}
+.status-btn {
+	width: 91px;
+}
+
+/* view plan detail*/
+.btn.btn-primary.pull-right {
+	float: none;
+	display: inline-block
+}
+.btn.btn-default.btn-primary {
+	color: #fff
+}
+.well {
+	border-top-width: 0;
+	border-top-style: solid;
+	border-top-color: #e3e3e3
+}
+.collapse.navbar-collapse {
+	color: #fff
 }

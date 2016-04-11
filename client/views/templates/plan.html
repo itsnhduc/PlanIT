@@ -1,7 +1,99 @@
 <template name="plan">
-	<h3>&raquo;{{title}}</h3>
-	<h5>by <a href="/user/{{createdBy}}">{{organizer}}</a> ({{visibility}})</h5>
-	<h5>at <a href="#" class="location" data-toggle="modal" data-target="#mapModal">{{location.name}}</a></h5>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-sm-7">
+							<h1>{{title}}</h1>
+							<h4>{{description}}</h4>
+						</div>
+						<div class="col-sm-5">
+							<div class="interest-level">
+								{{> interestLevel}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					{{#if isOwner}}
+						<h4 id="settings" class="pull-right" style="cursor: pointer;">
+							<i class="fa fa-cog"></i>
+						</h4>
+					{{/if}}
+					<h4>Details</h4>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>
+							<strong style="text-decoration: underline;">Organizer:</strong>
+							<a href="/user/{{createdBy}}"> {{organizer}}</a>
+						</li>
+						<li>
+							<strong style="text-decoration: underline;">Location:</strong>
+							<a href="#" class="location" data-toggle="modal" data-target="#mapModal"> {{location.name}}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Comments</h4>
+				</div>
+				<div class="panel-body">
+					<form class="row">
+						<div class="col-md-9 form-group">
+							<input id="comment-input" type="text" class="form-control" placeholder="What's on your mind?">
+						</div>
+						<div class="col-md-1 form-group">
+							<button id="add-comment" class="btn btn-primary">Comment</button>
+						</div>
+					</form>
+					<ul>
+					{{#each comments}}
+						<li>
+							<strong>{{name}}:</strong> {{text}}
+							{{#if isCommentOwner}}
+								 - <a id="delete-comment" href="#">Delete</a>
+							{{/if}}
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Going</h4>
+				</div>
+				<div class="panel-body">
+					<ul>
+						{{#each goingUsers}}
+							<li><a href="/user/{{userId}}">{{name}}</a></li>
+						{{/each}}
+					</ul>
+				</div>
+				<div class="panel-heading">
+					<h4>Interested</h4>
+				</div>
+				<div class="panel-body">
+					<ul>
+						{{#each interestedUsers}}
+							<li><a href="/user/{{userId}}">{{name}}</a></li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- modal -->
 	<div id="mapModal" class="modal fade" role="dialog">
@@ -24,26 +116,4 @@
 		</div>
 	</div>
 	<!-- !modal -->
-
-	<h4>{{description}}</h4>
-	{{> interestLevel}}
-	<h5><strong>Going:</strong> {{#each goingUsers}}{{this}}{{/each}}</h5>
-	<h5><strong>Interested:</strong> {{#each interestedUsers}}{{this}}{{/each}}</h5>
-	{{#if isOwner}}
-		<button id="settings" class="btn btn-primary">Plan settings</button>
-	{{/if}}
-	<br>
-	<h4>Comments</h4>
-	<form class="row">
-		<div class="col-md-4 form-group">
-			<input id="comment-input" type="text" class="form-control" placeholder="What's on your mind?">
-		</div>
-		<div class="col-md-1 form-group">
-			<button id="add-comment" class="btn btn-primary">Comment</button>
-		</div>
-	</form>
-	
-	{{#each comments}}
-		<p><strong>{{name}}:</strong> {{text}}{{#if isCommentOwner}} - <a id="delete-comment" href="#">Delete</a>{{/if}}</p>
-	{{/each}}
 </template>

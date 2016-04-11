@@ -1,37 +1,58 @@
 <template name="master">
-	<main class="container">
-	<div class="row">
-		<div class="col-md-6">
-		<h1>PlanIT</h1>
-			<ul>
-				<li>
-					<a href="/home">Home</a>
-				</li>
-				{{#if currentUser}}
-				<li>
-					<a href="/">Newsfeed</a>
-				</li>
-				<li>
-					<a href="/notifications">Notifications</a>
-				</li>
-				<li>
-					<a href="/create-plan">Create Plan</a>
-				</li>
-				<li>
-					<a href="/user/{{currentUser._id}}">Profile</a>
-				</li>
-				{{/if}}
-			</ul>
+	<div class="column col-sm-12 col-xs-12" id="main">
+		<!-- top nav -->
+		<div class="navbar navbar-blue navbar-static-top">	
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- <a href="/" class="navbar-brand logo">P</a> -->
+				<a href="/"><img src="/img/logo.jpg" class="app-logo"></a>
+			</div>
+			<nav class="collapse navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					{{#if currentUser}}
+					<li>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications</a>
+						{{> notifications}}
+					</li>
+					{{/if}}
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+					<li>
+						<a href="/user/{{currentUser._id}}">
+							{{currentUser.profile.firstname}} {{currentUser.profile.lastname}}
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a id="profile-settings">Profile Settings</a>
+							</li>
+							<li>
+								<a id="logout">Logout</a>
+							</li>
+						</ul>
+					</li>
+					{{/if}}
+				</ul>
+			</nav>
 		</div>
-		<div class="col-md-6">
-			{{#if currentUser}}
-				<h2>Wellcome, {{currentUser.profile.firstname}} {{currentUser.profile.lastname}}</h2>
-				<button id="profile-settings" class="btn btn-primary">Profile Settings</button>
-				<button id="logout" class="btn btn-danger">Logout</button>
-			{{/if}}
+		<!-- /top nav -->
+		<div class="padding">
+			<div class="full col-sm-8 col-sm-offset-2">
+				<!-- content -->											
+				<div class="row">
+					{{> yield}}
+				</div>
+			</div>
 		</div>
 	</div>
-	<hr>
-	{{> yield}}
-	</main>
 </template>

@@ -1,6 +1,13 @@
 <template name="newsfeed">
-	<h1>Newsfeed</h1>
+	<div class="well">
+		{{> createPlan}}
+	</div>
+
 	{{#each plans}}
-		{{> planShort}}
+	<div class="panel panel-default">
+		<div class="panel-body">
+			{{> planShort}}
+		</div>
+	</div>
 	{{/each}}
 </template>
