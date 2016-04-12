@@ -1,7 +1,7 @@
 <template name="planShort">
 	<a href="/plan/{{_id}}" class="row newsfeed-plan clickable">
 		<div class="col-sm-7">
-			<h1>{{title}}</h1>
+			<h1>{{title}} <i class="fa fa-{{visibilityIcon}}" style="font-size: medium" aria-hidden="true"></i></h1>
 			<p>{{datetime}} at {{location.name}}</p>
 			<h4>{{description}}</h4>
 		</div>

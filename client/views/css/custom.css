@@ -45,6 +45,9 @@ table {
 .clickable {
 	cursor: pointer;
 }
+nav > ul > li > a {
+	font-size: bolder;
+}
 
 /* view plan detail*/
 .btn.btn-primary.pull-right {
