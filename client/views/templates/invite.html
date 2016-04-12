@@ -1,0 +1,26 @@
+<template name="invite">
+	<div class="well">
+		<form class="form-horizontal" role="form">
+			<div class="new">
+				<h4>Invite</h4>
+				
+				<div class="btn-group-vertical" style="width: 100%">
+					{{#each friends}}
+						<button id="friend-{{_id}}" class="btn btn-default friend" style="width: 100%">{{name}}</button>
+					{{/each}}
+				</div>
+
+				<div class="row" style="margin-top: 2px">
+					<div class="col-sm-12">
+						<div class="form-group" style="float:right">
+							<button id="invite" class="btn btn-primary">Invite</button>
+							<button id="select-all" class="btn btn-success">Select all</button>
+							<button id="clear-all" class="btn btn-danger">Clear all</button>
+							<a id="cancel" class="btn btn-default" onclick="window.history.back();">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>

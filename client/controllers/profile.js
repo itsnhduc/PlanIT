@@ -49,7 +49,6 @@ getFriends = function(user) {
 			name: curFriendFirstName + ' ' + curFriendLastName
 		});
 	}
-	console.log(friends);
 	return {
 		entries: friends,
 		count: friends.length

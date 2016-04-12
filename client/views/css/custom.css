@@ -42,6 +42,9 @@ table {
 	font-style: italic;
 	color: gray;
 }
+.clickable {
+	cursor: pointer;
+}
 
 /* view plan detail*/
 .btn.btn-primary.pull-right {

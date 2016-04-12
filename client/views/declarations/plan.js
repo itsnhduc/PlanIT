@@ -34,6 +34,10 @@ Template.plan.events({
 	'click #delete-comment': function(event) {
 		event.preventDefault();
 		deleteComment(this);
+	},
+	'click #invite-btn': function(event) {
+		event.preventDefault();
+		Router.go('/plan/' + this._id + '/invite');
 	}
 });
 

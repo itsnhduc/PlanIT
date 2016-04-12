@@ -5,11 +5,13 @@ var generateActionNoti = function(actionType) {
 		case 'friend confirm':
 			return 'has confirmed your friend request';
 		case 'comment':
-			return 'commented on your plan';
+			return 'commented on ';
 		case 'status going':
-			return 'is going to your event';
+			return 'is going to ';
 		case 'status interested':
-			return 'is interested to your plan';
+			return 'is interested in ';
+		case 'invite':
+			return 'has invited you to join ';
 		default:
 			return '(error)'
 	}
